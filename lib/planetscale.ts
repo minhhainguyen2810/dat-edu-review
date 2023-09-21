@@ -9,6 +9,22 @@ interface User {
   email: string;
 }
 
+interface School {
+  id: Generated<number>;
+  name: string;
+  location: string;
+  description: string;
+}
+
+interface Program {
+  id: Generated<number>;
+  program_id: string;
+  name: string;
+  pros: string;
+  cons: string;
+  description: string;
+}
+
 interface Database {
   users: User;
   // https://github.com/nextauthjs/next-auth/issues/4922
