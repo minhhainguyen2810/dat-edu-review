@@ -25,6 +25,21 @@ interface Program {
   description: string;
 }
 
+interface ProgramComments {
+  id: Generated<number>;
+  program_id: string;
+  name: string;
+  pros: string;
+  cons: string;
+  description: string;
+  `need_to_improved`: string;
+	`date`: date,
+	`rate_teachers`: number,
+	`rate_quality`: number,
+	`rate_facilities`: number,
+	`rate_overall` number,
+}
+
 interface Database {
   users: User;
   // https://github.com/nextauthjs/next-auth/issues/4922
