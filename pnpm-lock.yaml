@@ -5,6 +5,7 @@ specifiers:
   '@headlessui/tailwindcss': ^0.2.0
   '@heroicons/react': ^2.0.18
   '@planetscale/database': ^1.11.0
+  '@tailwindcss/forms': ^0.5.6
   '@tremor/react': ^3.6.6
   '@types/js-cookie': ^3.0.3
   '@types/node': 20.5.6
@@ -57,6 +58,9 @@ dependencies:
   tailwindcss: 3.3.3
   typescript: 5.2.2
   zustand: 4.4.1_gq4reeurwxuj4hvyerswzzqthy
+
+devDependencies:
+  '@tailwindcss/forms': 0.5.6_tailwindcss@3.3.3
 
 packages:
 
@@ -373,6 +377,15 @@ packages:
     dependencies:
       tslib: 2.6.2
     dev: false
+
+  /@tailwindcss/forms/0.5.6_tailwindcss@3.3.3:
+    resolution: {integrity: sha512-Fw+2BJ0tmAwK/w01tEFL5TiaJBX1NLT1/YbWgvm7ws3Qcn11kiXxzNTEQDMs5V3mQemhB56l3u0i9dwdzSQldA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.3.3
+    dev: true
 
   /@tremor/react/3.7.9_zrapbp5bhju6nhklhwf5u2ffs4:
     resolution: {integrity: sha512-+JtJC6y/A3BVEm/Rh173ik9zmlOJj2N9Hq+V7Xfe5Q4A8fRqpl3WaEMj1BK2lSUPN48PZh5RMFOwDcFh09lYHA==}
@@ -2064,6 +2077,11 @@ packages:
       braces: 3.0.2
       picomatch: 2.3.1
     dev: false
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+    dev: true
 
   /minimatch/3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}

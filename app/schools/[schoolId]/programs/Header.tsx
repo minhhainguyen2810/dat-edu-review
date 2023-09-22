@@ -5,7 +5,7 @@ import Search from '../../../search';
 import { Dialog } from '@headlessui/react';
 import ProgramList from './ProgramList';
 import { useState } from 'react';
-import { useModalStore } from './hooks';
+import { useModalStore } from 'app/hooks';
 
 export default function Page() {
   const { setOpened, opened } = useModalStore((state) => state);
