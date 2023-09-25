@@ -12,9 +12,10 @@ export interface IModal {
   icon: ReactElement;
   children: React.ReactElement;
   okText: string;
+  onOk: (data: any) => void;
 }
 
-const Modal: React.FC<IModal> = ({ title, icon, children, okText }) => {
+const Modal: React.FC<IModal> = ({ title, icon, children, okText, onOk }) => {
   const { setOpened, opened } = useModalStore((state) => state);
 
   const cancelButtonRef = useRef(null);
@@ -71,7 +72,7 @@ const Modal: React.FC<IModal> = ({ title, icon, children, okText }) => {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpened(false)}
+                    onClick={onOk}
                   >
                     {okText}
                   </button>

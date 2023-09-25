@@ -6,6 +6,9 @@ const nextConfig = {
       'avatar.vercel.sh',
       'googleusercontent.com'
     ]
+  },
+  experimental: {
+    serverActions: true
   }
 };
 

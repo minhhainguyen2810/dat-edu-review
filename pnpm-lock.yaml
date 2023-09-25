@@ -25,6 +25,7 @@ specifiers:
   prop-types: ^15.8.1
   react: 18.2.0
   react-dom: 18.2.0
+  react-hook-form: ^7.46.2
   server-only: ^0.0.1
   tailwindcss: ^3.3.3
   typescript: 5.2.2
@@ -54,6 +55,7 @@ dependencies:
   prop-types: 15.8.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
+  react-hook-form: 7.46.2_react@18.2.0
   server-only: 0.0.1
   tailwindcss: 3.3.3
   typescript: 5.2.2
@@ -2521,6 +2523,15 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+    dev: false
+
+  /react-hook-form/7.46.2_react@18.2.0:
+    resolution: {integrity: sha512-x1DWmHQchV7x2Rq9l99M/cQHC8JGchAnw9Z0uTz5KrPa0bTl/Inm1NR7ceOARfIrkNuQNAhuSuZPYa6k7QYn3Q==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

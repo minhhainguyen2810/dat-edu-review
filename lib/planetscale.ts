@@ -33,7 +33,7 @@ interface ProgramComment {
   description: string;
 }
 
-interface Database {
+export interface Database {
   users: User;
   school: School;
   program: Program;
