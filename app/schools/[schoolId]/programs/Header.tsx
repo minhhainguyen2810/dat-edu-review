@@ -8,11 +8,11 @@ import { useState } from 'react';
 import { useModalStore } from 'app/hooks';
 
 export default function Page() {
-  const { setOpened, opened } = useModalStore((state) => state);
+  const { setOpened } = useModalStore((state) => state);
 
   return (
     <div className="flex justify-between items-center">
-      <Title> All Programs</Title>
+      <Title>Chương trình đào tạo</Title>
       <Button onClick={() => setOpened(true)}>Tạo mới </Button>
     </div>
   );

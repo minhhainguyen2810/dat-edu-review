@@ -6,10 +6,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 type Inputs = {
   name: string;
-  duration: string;
-  goal: string;
+  location: string;
   description: string;
-  school_id: string;
 };
 
 import Modal from 'app/components/Modal';
@@ -34,18 +32,16 @@ export default function CreateModal({}) {
     watch,
     formState: { errors }
   } = useForm<Inputs>();
-  const searchParams = useParams();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await getData({
-      ...data,
-      school_id: searchParams?.schoolId as string
+      ...data
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Modal
-        title="Thêm mới chương trình học"
+        title="Thêm mới trường học"
         okText="Thêm"
         icon={
           <AcademicCapIcon
@@ -72,7 +68,7 @@ export default function CreateModal({}) {
                       id="name"
                       autoComplete="name"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="Khoa học máy tính"
+                      placeholder="Trường đại học Bách Khoa TP Hồ Chí Minh"
                       {...register('name')}
                     />
                   </div>
@@ -81,40 +77,19 @@ export default function CreateModal({}) {
 
               <div className="sm:col-span-4">
                 <label
-                  htmlFor="goal"
+                  htmlFor="location"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Mục tiêu đào tạo
+                  Địa chỉ
                 </label>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="text"
-                      id="goal"
-                      autoComplete="goal"
+                      id="location"
+                      autoComplete="location"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      {...register('goal')}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="sm:col-span-4">
-                <label
-                  htmlFor="duration"
-                  className="block text-sm font-medium leading-6 text-gray-900"
-                >
-                  Thời gian đào tạo
-                </label>
-                <div className="mt-2">
-                  <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input
-                      type="text"
-                      id="duration"
-                      autoComplete="duration"
-                      className="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                      placeholder="4 năm"
-                      {...register('duration')}
+                      {...register('location')}
                     />
                   </div>
                 </div>
@@ -133,7 +108,7 @@ export default function CreateModal({}) {
                     rows={3}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     defaultValue={''}
-                    placeholder="Thông tin thêm về chương trình học này"
+                    placeholder="Thông tin thêm về trường học này"
                     {...register('description')}
                   />
                 </div>
