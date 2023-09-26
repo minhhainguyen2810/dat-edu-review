@@ -3,15 +3,17 @@
 import { useParams } from 'next/navigation';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { Card, Title, Subtitle, Text, Divider } from '@tremor/react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Rate } from 'antd';
+import { useState } from 'react';
 
 type Inputs = {
-  name: string;
-  duration: string;
-  goal: string;
-  description: string;
-  program_id: string;
+  pros: string;
+  cons: string;
+  need_to_improved: string;
 };
+
+const desc = ['Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
 
 import { Button } from '@tremor/react';
 
@@ -33,6 +35,7 @@ interface ProgramDetailProps {
     name: string;
     description: string;
     school_name: string;
+    rate: number;
   };
 }
 
@@ -41,14 +44,18 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors }
   } = useForm<Inputs>();
   const searchParams = useParams();
+  const [value, setValue] = useState(3);
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await getData({
-      ...data,
-      program_id: searchParams?.programId as string
-    });
+    console.log(data);
+
+    // await getData({
+    //   ...data,
+    //   program_id: searchParams?.programId as string
+    // });
   };
 
   return (
@@ -61,6 +68,28 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
               {programDetail.school_name}
             </Title>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="pros"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Ưu điểm
+                </label>
+                <div className="mt-2">
+                  {/* <Rate
+                    tooltips={desc}
+                    // onChange={setValue}
+                    // value={value}
+                    {...register('rate')}
+                  /> */}
+                  <Controller
+                    name="rate"
+                    control={control}
+                    render={({ field }) => <Rate {...field} tooltips={desc} />}
+                  />
+                </div>
+              </div>
+
               <div className="sm:col-span-4">
                 <label
                   htmlFor="pros"
@@ -123,7 +152,6 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
           <div className="flex justify-center md:justify-start">
