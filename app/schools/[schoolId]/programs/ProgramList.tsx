@@ -5,7 +5,7 @@ export default async function ProgramList({
   params,
   searchParams
 }: {
-  params: { schoolId: string };
+  params: { schoolId: number };
   searchParams: { q: string };
 }) {
   const search = searchParams.q ?? '';
@@ -14,7 +14,7 @@ export default async function ProgramList({
   const programs = await queryBuilder
     .selectFrom('program')
     .select(['id', 'name', 'duration', 'goal', 'description', 'school_id'])
-    .where('school_id', '=', `${schoolId}`)
+    .where('school_id', '=', schoolId)
     .where('name', 'like', `%${search}%`)
     .execute();
 

@@ -18,8 +18,9 @@ export default async function SchoolList({
       {schools.map(({ id, name, description }) => (
         <a key={id} href={`/schools/${id}/programs/`}>
           <Card className="mt-6">
-            <h3>{name}</h3>
+            <Title>{name}</Title>
             <p>{description.substring(0, 50)}...</p>
+            <p className="mt-2">Đánh giá trung bình: 4.5 ⭐</p>
           </Card>
         </a>
       ))}

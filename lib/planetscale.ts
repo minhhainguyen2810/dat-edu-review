@@ -18,7 +18,7 @@ interface School {
 
 interface Program {
   id: Generated<number>;
-  school_id: string;
+  school_id: number;
   name: string;
   duration: string;
   goal: string;
@@ -27,9 +27,11 @@ interface Program {
 
 interface ProgramComment {
   id: Generated<number>;
-  program_id: string;
+  program_id: number;
   pros: string;
   cons: string;
+  need_to_improved: string;
+
   description: string;
 }
 
@@ -38,7 +40,11 @@ export interface Database {
   school: School;
   program: Program;
   program_comment: ProgramComment;
-
+  date: string;
+	rate_teachers: number;
+	rate_quality: number;
+	rate_facilities: number;
+	rate_overall: number;
   // https://github.com/nextauthjs/next-auth/issues/4922
 }
 

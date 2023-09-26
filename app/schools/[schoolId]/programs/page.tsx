@@ -8,7 +8,7 @@ export default function Page({
   params,
   searchParams
 }: {
-  params: { schoolId: string };
+  params: { schoolId: number };
   searchParams: { q: string };
 }) {
   return (
