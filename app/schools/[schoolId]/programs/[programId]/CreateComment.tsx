@@ -5,7 +5,7 @@ import { Rate } from 'antd';
 import { useParams } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
-import type { UploadProps } from 'antd/es/upload/interface';
+import type { RcFile, UploadProps } from 'antd/es/upload/interface';
 import Upload from 'app/components/Upload';
 
 type Inputs = {
@@ -33,11 +33,15 @@ async function sendComment(body: Inputs, schoolId: string, programId: string) {
   return res.json();
 }
 
-interface ProgramDetailProps {
-  programDetail: ProgramDetail;
+interface ProgramDetailProps extends ProgramDetail {
+  school_name: string;
 }
 
-export default function CreateComment({ programDetail }: ProgramDetailProps) {
+export default function CreateComment({
+  programDetail
+}: {
+  programDetail: ProgramDetailProps;
+}) {
   const {
     register,
     handleSubmit,
@@ -52,10 +56,16 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
     await sendComment(data, schoolId, programId);
   };
 
+  // interface UploadRequestProps extends UploadRequestOption
+
   const customRequest: UploadProps['customRequest'] = async ({
     file,
     fileName,
     onSuccess
+  }: {
+    file: RcFile | string | Blob;
+    fileName?: string;
+    onSuccess?: any;
   }) => {
     try {
       const response = await fetch(
