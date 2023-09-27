@@ -1,4 +1,4 @@
-import { Card, Title, Subtitle, Text, Divider } from '@tremor/react';
+import { Title } from '@tremor/react';
 import { queryBuilder } from 'lib/planetscale';
 import { Fragment } from 'react';
 import ProgramDetail from './ProgramDetail';
@@ -27,7 +27,16 @@ export default async function Page({
     .execute();
   const program_comments = await queryBuilder
     .selectFrom('program_comment')
-    .select(['id', 'pros', 'cons', 'program_id', 'need_to_improved'])
+    .select([
+      'id',
+      'pros',
+      'cons',
+      'program_id',
+      'need_to_improved',
+      'rate_overall',
+      'date',
+      'user'
+    ])
     .where('program_id', '=', programId)
     .execute();
 

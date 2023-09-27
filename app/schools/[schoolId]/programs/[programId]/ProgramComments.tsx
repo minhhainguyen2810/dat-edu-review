@@ -16,7 +16,11 @@ export default async function ProgramComment({
           <Text>Ưu điểm: {comment.pros}</Text>
           <Text>Nhược điểm: {comment.cons}</Text>
           <Text>Cần cải thiện: {comment.need_to_improved}</Text>
-          <Text className="mt-2">Đánh giá tổng quan: 4.5 ⭐</Text>
+          {comment.rate_overall && (
+            <Text className="mt-2">
+              Đánh giá tổng quan: {comment.rate_overall} ⭐
+            </Text>
+          )}
           {index < programComment.length - 1 && <Divider />}
         </Fragment>
       ))}

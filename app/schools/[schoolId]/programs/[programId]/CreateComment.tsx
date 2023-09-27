@@ -34,12 +34,7 @@ async function sendComment(body: Inputs, schoolId: string, programId: string) {
 }
 
 interface ProgramDetailProps {
-  programDetail: {
-    name: string;
-    description: string;
-    school_name: string;
-    rate: number;
-  };
+  programDetail: ProgramDetail;
 }
 
 export default function CreateComment({ programDetail }: ProgramDetailProps) {

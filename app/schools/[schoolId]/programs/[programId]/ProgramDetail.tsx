@@ -1,14 +1,12 @@
-import { Card, Title, Subtitle, Text, Divider } from '@tremor/react';
-import { queryBuilder } from 'lib/planetscale';
-import { Fragment } from 'react'
+import { Card, Text } from '@tremor/react';
 
 interface ProgramDetailProps {
-  programDetail: {
-    name: string; description: string;
-  }
+  programDetail: ProgramDetail;
 }
 
-export default async function ProgramDetail({ programDetail }: ProgramDetailProps) {
+export default async function ProgramDetail({
+  programDetail
+}: ProgramDetailProps) {
   return (
     <Card className="my-6">
       <Text className="font-semibold">Khoa/ngành: {programDetail.name}</Text>

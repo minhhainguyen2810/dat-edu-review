@@ -36,6 +36,7 @@ interface ProgramComment {
   rate_quality: number;
   rate_facilities: number;
   rate_overall: number;
+  user: string;
 }
 
 export interface Database {
