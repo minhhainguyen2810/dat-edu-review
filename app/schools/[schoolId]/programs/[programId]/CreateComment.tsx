@@ -7,6 +7,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import type { RcFile, UploadProps } from 'antd/es/upload/interface';
 import Upload from 'app/components/Upload';
+import { IProgramDetail } from 'app/types';
 
 type Inputs = {
   pros: string;
@@ -33,7 +34,7 @@ async function sendComment(body: Inputs, schoolId: string, programId: string) {
   return res.json();
 }
 
-interface ProgramDetailProps extends ProgramDetail {
+interface ProgramDetailProps extends IProgramDetail {
   school_name: string;
 }
 

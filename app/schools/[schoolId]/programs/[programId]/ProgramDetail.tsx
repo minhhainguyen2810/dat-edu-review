@@ -1,7 +1,8 @@
 import { Card, Text } from '@tremor/react';
+import { IProgramDetail } from 'app/types';
 
 interface ProgramDetailProps {
-  programDetail: ProgramDetail;
+  programDetail: IProgramDetail;
 }
 
 export default async function ProgramDetail({

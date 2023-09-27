@@ -1,8 +1,9 @@
 import { Card, Text, Divider } from '@tremor/react';
+import { IProgramComment } from 'app/types';
 import { Fragment } from 'react';
 
 interface ProgramCommentProps {
-  programComment: ProgramComment[];
+  programComment: IProgramComment[];
 }
 
 export default async function ProgramComment({
