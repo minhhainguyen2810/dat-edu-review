@@ -31,8 +31,11 @@ interface ProgramComment {
   pros: string;
   cons: string;
   need_to_improved: string;
-
-  description: string;
+  date: string;
+  rate_teachers: number;
+  rate_quality: number;
+  rate_facilities: number;
+  rate_overall: number;
 }
 
 export interface Database {
@@ -40,11 +43,7 @@ export interface Database {
   school: School;
   program: Program;
   program_comment: ProgramComment;
-  date: string;
-	rate_teachers: number;
-	rate_quality: number;
-	rate_facilities: number;
-	rate_overall: number;
+
   // https://github.com/nextauthjs/next-auth/issues/4922
 }
 

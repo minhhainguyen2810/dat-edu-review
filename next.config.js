@@ -4,11 +4,9 @@ const nextConfig = {
     domains: [
       'avatars.githubusercontent.com',
       'avatar.vercel.sh',
-      'googleusercontent.com'
+      'googleusercontent.com',
+      'public.blob.vercel-storage.com'
     ]
-  },
-  experimental: {
-    serverActions: true
   }
 };
 

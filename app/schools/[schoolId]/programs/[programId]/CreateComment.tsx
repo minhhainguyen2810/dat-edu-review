@@ -1,11 +1,12 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { AcademicCapIcon } from '@heroicons/react/24/outline';
-import { Card, Title, Subtitle, Text, Divider } from '@tremor/react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { Button, Card, Title } from '@tremor/react';
 import { Rate } from 'antd';
-import { useState } from 'react';
+import { useParams } from 'next/navigation';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
+import type { UploadProps } from 'antd/es/upload/interface';
+import Upload from 'app/components/Upload';
 
 type Inputs = {
   pros: string;
@@ -14,16 +15,15 @@ type Inputs = {
   rate_overall: number;
   rate_teachers: number;
   rate_quality: number;
+  image_url: string;
 };
 
 const desc = ['Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
 
-import { Button } from '@tremor/react';
-
-async function getData(body: Inputs, schoolId: number, programId: number) {
+async function sendComment(body: Inputs, schoolId: string, programId: string) {
   const res = await fetch(`/schools/${schoolId}/programs/${programId}/api`, {
     method: 'POST',
-    body: JSON.stringify(body as any)
+    body: JSON.stringify({ ...body, program_id: programId })
   });
 
   if (!res.ok) {
@@ -50,18 +50,31 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
     control,
     formState: { errors }
   } = useForm<Inputs>();
-  const searchParams = useParams();
-  const [value, setValue] = useState(3);
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data);
+  const searchParams = useParams<{ schoolId: string; programId: string }>();
+  const { schoolId = '', programId = '' } = searchParams || {};
 
-    await getData(
-      {
-        data
-      },
-      searchParams?.schoolId,
-      searchParams?.programId
-    );
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    await sendComment(data, schoolId, programId);
+  };
+
+  const customRequest: UploadProps['customRequest'] = async ({
+    file,
+    fileName,
+    onSuccess
+  }) => {
+    try {
+      const response = await fetch(
+        `/schools/${schoolId}/programs/${programId}/api/uploadCommentImage?filename=${fileName}`,
+        {
+          method: 'POST',
+          body: file
+        }
+      );
+
+      onSuccess?.(await response.json(), file as any);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
@@ -151,6 +164,16 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
                     />
                   </div>
                 </div>
+              </div>
+
+              <div className="sm:col-span-4">
+                <Controller
+                  name="image_url"
+                  control={control}
+                  render={({ field }) => (
+                    <Upload {...field} customRequest={customRequest} />
+                  )}
+                />
               </div>
             </div>
           </div>

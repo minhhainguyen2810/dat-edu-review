@@ -1,5 +1,4 @@
 import { queryBuilder } from 'lib/planetscale';
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
@@ -8,7 +7,7 @@ export async function POST(request: Request) {
 
     await queryBuilder
       .insertInto('program_comment')
-      .values({ ...body })
+      .values(body)
       .executeTakeFirst();
     return NextResponse.json({ result: 'Oke' });
   } catch (err) {
