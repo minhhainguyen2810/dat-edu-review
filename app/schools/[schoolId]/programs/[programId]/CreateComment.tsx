@@ -11,14 +11,17 @@ type Inputs = {
   pros: string;
   cons: string;
   need_to_improved: string;
+  rate_overall: number;
+  rate_teachers: number;
+  rate_quality: number;
 };
 
 const desc = ['Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
 
 import { Button } from '@tremor/react';
 
-async function getData(body: Inputs) {
-  const res = await fetch(`/schools/api`, {
+async function getData(body: Inputs, schoolId: number, programId: number) {
+  const res = await fetch(`/schools/${schoolId}/programs/${programId}/api`, {
     method: 'POST',
     body: JSON.stringify(body as any)
   });
@@ -52,10 +55,13 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     console.log(data);
 
-    // await getData({
-    //   ...data,
-    //   program_id: searchParams?.programId as string
-    // });
+    await getData(
+      {
+        data
+      },
+      searchParams?.schoolId,
+      searchParams?.programId
+    );
   };
 
   return (
@@ -73,17 +79,11 @@ export default function CreateComment({ programDetail }: ProgramDetailProps) {
                   htmlFor="pros"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Ưu điểm
+                  Đánh giá tổng quan
                 </label>
                 <div className="mt-2">
-                  {/* <Rate
-                    tooltips={desc}
-                    // onChange={setValue}
-                    // value={value}
-                    {...register('rate')}
-                  /> */}
                   <Controller
-                    name="rate"
+                    name="rate_overall"
                     control={control}
                     render={({ field }) => <Rate {...field} tooltips={desc} />}
                   />
