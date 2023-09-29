@@ -5,7 +5,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { KyselyAdapter } from '@auth/kysely-adapter';
 
 export const authOptions: NextAuthOptions = {
-  adapter: KyselyAdapter(queryBuilder),
+  adapter: KyselyAdapter(queryBuilder as any) as any,
   providers: [
     GithubProvider({
       clientId: process.env.GITHUB_ID as string,
