@@ -8,6 +8,10 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import type { RcFile, UploadProps } from 'antd/es/upload/interface';
 import Upload from 'app/components/Upload';
 import { IProgramDetail } from 'app/types';
+import { useContext } from 'react';
+import { AuthContext } from 'app/providers/auth';
+import dayjs from 'dayjs';
+import { RATE_RANKS } from 'app/const';
 
 type Inputs = {
   pros: string;
@@ -17,9 +21,11 @@ type Inputs = {
   rate_teachers: number;
   rate_quality: number;
   image_url: string;
+  user: string;
+  date: string;
 };
 
-const desc = ['Rất tệ', 'Tệ', 'Bình thường', 'Tốt', 'Tuyệt vời'];
+
 
 async function sendComment(body: Inputs, schoolId: string, programId: string) {
   const res = await fetch(`/schools/${schoolId}/programs/${programId}/api`, {
@@ -43,6 +49,7 @@ export default function CreateComment({
 }: {
   programDetail: ProgramDetailProps;
 }) {
+  const session = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -54,10 +61,16 @@ export default function CreateComment({
   const { schoolId = '', programId = '' } = searchParams || {};
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await sendComment(data, schoolId, programId);
+    await sendComment(
+      {
+        ...data,
+        user: session?.user?.name || '',
+        date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
+      },
+      schoolId,
+      programId
+    );
   };
-
-  // interface UploadRequestProps extends UploadRequestOption
 
   const customRequest: UploadProps['customRequest'] = async ({
     file,
@@ -104,7 +117,7 @@ export default function CreateComment({
                   <Controller
                     name="rate_overall"
                     control={control}
-                    render={({ field }) => <Rate {...field} tooltips={desc} />}
+                    render={({ field }) => <Rate {...field} tooltips={RATE_RANKS} />}
                   />
                 </div>
               </div>
@@ -173,6 +186,12 @@ export default function CreateComment({
               </div>
 
               <div className="sm:col-span-4">
+                <label
+                  htmlFor="image_url"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Cần cải thiện
+                </label>
                 <Controller
                   name="image_url"
                   control={control}

@@ -1,13 +1,43 @@
 import 'server-only';
-import { Generated, Kysely } from 'kysely';
+import { Generated, GeneratedAlways, Kysely } from 'kysely';
 import { PlanetScaleDialect } from 'kysely-planetscale';
+import { KyselyAuth } from '@auth/kysely-adapter';
 
 interface User {
-  id: Generated<number>;
-  name: string;
-  username: string;
+  id: GeneratedAlways<string>;
+  name: string | null;
   email: string;
-}
+  emailVerified: Date | null;
+  image: string | null;
+};
+
+interface Account {
+  id: GeneratedAlways<string>;
+  userId: string;
+  type: string;
+  provider: string;
+  providerAccountId: string;
+  refresh_token: string | null;
+  access_token: string | null;
+  expires_at: number | null;
+  token_type: string | null;
+  scope: string | null;
+  id_token: string | null;
+  session_state: string | null;
+};
+
+interface Session {
+  id: GeneratedAlways<string>;
+  userId: string;
+  sessionToken: string;
+  expires: Date;
+};
+
+interface VerificationToken {
+  identifier: string;
+  token: string;
+  expires: Date;
+};
 
 interface School {
   id: Generated<number>;
@@ -40,16 +70,18 @@ interface ProgramComment {
 }
 
 export interface Database {
-  users: User;
+  User: User;
+  Account: Account;
+  Session: Session;
+  VerificationToken: VerificationToken;
   school: School;
   program: Program;
   program_comment: ProgramComment;
-
-  // https://github.com/nextauthjs/next-auth/issues/4922
 }
 
-export const queryBuilder = new Kysely<Database>({
+export const queryBuilder = new KyselyAuth<Database>({
   dialect: new PlanetScaleDialect({
     url: process.env.DATABASE_URL
+  
   })
 });

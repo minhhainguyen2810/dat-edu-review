@@ -2,8 +2,10 @@ import './globals.css';
 
 import { Analytics } from '@vercel/analytics/react';
 import Nav from './nav';
-import Toast from './toast';
 import { Suspense } from 'react';
+import { getServerSession } from 'next-auth/next';
+import { Providers } from './providers/auth';
+import { authOptions } from 'pages/api/auth/[...nextauth]';
 
 export const metadata = {
   title: 'Azubi Edu Review',
@@ -15,15 +17,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en" className="h-full bg-gray-50">
       <body className="h-full">
         <Suspense>
           <Nav />
         </Suspense>
-        {children}
+        <Providers session={session}>{children}</Providers>
         <Analytics />
-        {/* <Toast /> */}
       </body>
     </html>
   );

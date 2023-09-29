@@ -5,6 +5,7 @@ const nextConfig = {
       'avatars.githubusercontent.com',
       'avatar.vercel.sh',
       'googleusercontent.com',
+      'lh3.googleusercontent.com',
       'public.blob.vercel-storage.com'
     ]
   }

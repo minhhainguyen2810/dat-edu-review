@@ -6,6 +6,8 @@ export interface IProgramComment {
   image_url?: string;
   rate_overall?: number;
   program_id?: number;
+  user?: string;
+  date?: string;
 }
 
 export interface IProgramDetail {

@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ant-design/icons': 4.0.0
+  '@auth/kysely-adapter': ^0.1.1
   '@headlessui/react': ^1.7.17
   '@headlessui/tailwindcss': ^0.2.0
   '@heroicons/react': ^2.0.18
@@ -16,6 +17,7 @@ specifiers:
   '@vercel/blob': ^0.12.5
   antd: ^5.9.3
   autoprefixer: ^10.4.15
+  dayjs: ^1.11.10
   eslint: 8.48.0
   eslint-config-next: 13.4.19
   js-cookie: ^3.0.5
@@ -36,6 +38,7 @@ specifiers:
 
 dependencies:
   '@ant-design/icons': 4.0.0_react@18.2.0
+  '@auth/kysely-adapter': 0.1.1_kysely@0.26.3
   '@headlessui/react': 1.7.17_biqbaboplfbrettd7655fr4n2y
   '@headlessui/tailwindcss': 0.2.0_tailwindcss@3.3.3
   '@heroicons/react': 2.0.18_react@18.2.0
@@ -49,6 +52,7 @@ dependencies:
   '@vercel/blob': 0.12.5
   antd: 5.9.3_biqbaboplfbrettd7655fr4n2y
   autoprefixer: 10.4.15_postcss@8.4.30
+  dayjs: 1.11.10
   eslint: 8.48.0
   eslint-config-next: 13.4.19_w2g2uv42be7wag4oipwkfv43p4
   js-cookie: 3.0.5
@@ -156,6 +160,33 @@ packages:
       react: 18.2.0
       resize-observer-polyfill: 1.5.1
       throttle-debounce: 5.0.0
+    dev: false
+
+  /@auth/core/0.10.2:
+    resolution: {integrity: sha512-fe6nwrZTZFSoPf82gXxWQY9EkEv6rgsPjYs+WM1Gpgqfi+eNsXdYEJV57mnF30hIyWlPcxyC/KjGLcYw+G/KXw==}
+    peerDependencies:
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      nodemailer:
+        optional: true
+    dependencies:
+      '@panva/hkdf': 1.1.1
+      cookie: 0.5.0
+      jose: 4.14.6
+      oauth4webapi: 2.3.0
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3_preact@10.11.3
+    dev: false
+
+  /@auth/kysely-adapter/0.1.1_kysely@0.26.3:
+    resolution: {integrity: sha512-wERqaZVm1FjUrlLEK0LFqSM+gvGniExowuMX169XSM6OoPGa6acJPpcrNVOKH9he3zcJz1QioYPHoAWxgxR50g==}
+    peerDependencies:
+      kysely: ^0.26.1
+    dependencies:
+      '@auth/core': 0.10.2
+      kysely: 0.26.3
+    transitivePeerDependencies:
+      - nodemailer
     dev: false
 
   /@babel/code-frame/7.22.13:
@@ -2951,6 +2982,10 @@ packages:
     resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}
     dev: false
 
+  /oauth4webapi/2.3.0:
+    resolution: {integrity: sha512-JGkb5doGrwzVDuHwgrR4nHJayzN4h59VCed6EW8Tql6iHDfZIabCJvg6wtbn5q6pyB2hZruI3b77Nudvq7NmvA==}
+    dev: false
+
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -3213,6 +3248,15 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
+  /preact-render-to-string/5.2.3_preact@10.11.3:
+    resolution: {integrity: sha512-aPDxUn5o3GhWdtJtW0svRC2SS/l8D9MAgo2+AWml+BhDImb27ALf04Q2d+AHqUUOc6RdSXFIBVa2gxzgMKgtZA==}
+    peerDependencies:
+      preact: '>=10'
+    dependencies:
+      preact: 10.11.3
+      pretty-format: 3.8.0
+    dev: false
+
   /preact-render-to-string/5.2.6_preact@10.17.1:
     resolution: {integrity: sha512-JyhErpYOvBV1hEPwIxc/fHWXPfnEGdRKxc8gFdAZ7XV4tlzyzG847XAyEZqoDnynP88akM4eaHcSOzNcLWFguw==}
     peerDependencies:
@@ -3220,6 +3264,10 @@ packages:
     dependencies:
       preact: 10.17.1
       pretty-format: 3.8.0
+    dev: false
+
+  /preact/10.11.3:
+    resolution: {integrity: sha512-eY93IVpod/zG3uMF22Unl8h9KkrcKIRs2EGar8hwLZZDU1lkjph303V9HZBwufh2s736U6VXuhD109LYqPoffg==}
     dev: false
 
   /preact/10.17.1:

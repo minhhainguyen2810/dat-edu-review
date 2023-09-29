@@ -38,6 +38,7 @@ export default async function Page({
       'user'
     ])
     .where('program_id', '=', programId)
+    .orderBy('date', 'desc')
     .execute();
 
   const { school_name } = programDetail[0];

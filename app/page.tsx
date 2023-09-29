@@ -12,8 +12,8 @@ export default async function IndexPage({
 }) {
   const search = searchParams.q ?? '';
   const users = await queryBuilder
-    .selectFrom('users')
-    .select(['id', 'name', 'username', 'email'])
+    .selectFrom('User')
+    .select(['id', 'name', 'email'])
     .where('name', 'like', `%${search}%`)
     .execute();
 
@@ -25,7 +25,7 @@ export default async function IndexPage({
       </Text>
       <Search />
       <Card className="mt-6">
-        <UsersTable users={users} />
+        {/* <UsersTable users={users} /> */}
       </Card>
     </main>
   );

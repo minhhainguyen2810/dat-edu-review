@@ -1,29 +1,62 @@
-import { Card, Text, Divider } from '@tremor/react';
+'use client';
+
+import { Card, Text } from '@tremor/react';
 import { IProgramComment } from 'app/types';
 import { Fragment } from 'react';
+
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
+import { Avatar, Rate } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
+import RateInfo from 'app/components/Rate';
+
+dayjs.extend(relativeTime);
 
 interface ProgramCommentProps {
   programComment: IProgramComment[];
 }
 
-export default async function ProgramComment({
+export default function ProgramComment({
   programComment
 }: ProgramCommentProps) {
   return (
-    <Card className="my-6">
+    <Card className="my-6 space-y-4">
       {programComment.map((comment, index) => (
-        <Fragment key={comment.id}>
-          <Text className="font-semibold">Người dùng: Người dùng ẩn danh</Text>
-          <Text>Ưu điểm: {comment.pros}</Text>
-          <Text>Nhược điểm: {comment.cons}</Text>
-          <Text>Cần cải thiện: {comment.need_to_improved}</Text>
-          {comment.rate_overall && (
-            <Text className="mt-2">
-              Đánh giá tổng quan: {comment.rate_overall} ⭐
-            </Text>
-          )}
-          {index < programComment.length - 1 && <Divider />}
-        </Fragment>
+        <div className="" key={comment.id}>
+          <div className="flex">
+            <div className="flex-1 max-w-[40px]">
+              <Avatar size="large" icon={<UserOutlined />} />
+            </div>
+
+            <div className="ml-5">
+              <div className="flex items-baseline space-x-2">
+                <span className="font-semibold">
+                  {comment.user || 'Người dùng ẩn danh'}
+                </span>
+                {comment.date && (
+                  <span className="text-[14px] text-slate-500">
+                    {dayjs(new Date()).to(dayjs(comment.date))}
+                  </span>
+                )}
+              </div>
+              {comment.rate_overall && (
+                <RateInfo value={comment.rate_overall} />
+              )}
+              <Text className="mb-2 mt-3">
+                <span>Ưu điểm: </span>
+                <span>{comment.pros || '-'}</span>
+              </Text>
+              <Text className="mb-2">
+                <span>Nhược điểm: </span>
+                <span>{comment.cons || '-'}</span>
+              </Text>
+              <Text>
+                <span>Cần cải thiện: </span>
+                <span>{comment.need_to_improved || '-'}</span>
+              </Text>
+            </div>
+          </div>
+        </div>
       ))}
     </Card>
   );
