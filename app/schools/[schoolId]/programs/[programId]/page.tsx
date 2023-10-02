@@ -1,6 +1,5 @@
 import { Title } from '@tremor/react';
 import { queryBuilder } from 'lib/planetscale';
-import { Fragment } from 'react';
 import ProgramDetail from './ProgramDetail';
 import ProgramComment from './ProgramComments';
 import CreateComment from './CreateComment';

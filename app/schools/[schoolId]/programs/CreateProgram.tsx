@@ -31,7 +31,6 @@ export default function CreateModal({}) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors }
   } = useForm<Inputs>();
   const searchParams = useParams();

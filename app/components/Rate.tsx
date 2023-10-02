@@ -7,7 +7,7 @@ export default function RateInfo({ value }: { value: number }) {
   return (
     <div className="flex items-center space-x-2">
       <span>
-        <Rate value={value} />
+        <Rate value={value} allowHalf disabled />
       </span>{' '}
       <span className={RATE_COLOR[Math.round(value) - 1]}>
         {RATE_RANKS[Math.round(value) - 1]}

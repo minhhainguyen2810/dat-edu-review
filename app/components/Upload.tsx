@@ -13,7 +13,6 @@ export interface IUpload {
   onChange: (value: string) => void;
   name: string;
   customRequest: UploadProps['customRequest'];
-  ref: any;
 }
 
 const Upload: React.FC<IUpload> = ({
@@ -21,7 +20,6 @@ const Upload: React.FC<IUpload> = ({
   value,
   onChange,
   customRequest,
-  ref,
   ...props
 }) => {
   const [loading, setLoading] = useState(false);
@@ -53,7 +51,6 @@ const Upload: React.FC<IUpload> = ({
       customRequest={customRequest}
       beforeUpload={beforeUpload}
       onChange={handleChange}
-      ref={ref}
       {...props}
     >
       {value ? (

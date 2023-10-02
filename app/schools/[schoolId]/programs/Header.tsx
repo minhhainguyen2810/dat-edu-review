@@ -1,19 +1,23 @@
 'use client';
 
-import { Card, Title, Button } from '@tremor/react';
-import Search from '../../../search';
-import { Dialog } from '@headlessui/react';
-import ProgramList from './ProgramList';
-import { useState } from 'react';
+import { Title, Button } from '@tremor/react';
+
 import { useModalStore } from 'app/hooks';
+import { useUserInfo } from 'app/hooks/useUserInfo';
 
 export default function Page() {
   const { setOpened } = useModalStore((state) => state);
 
+  const { isAdmin } = useUserInfo();
+
   return (
     <div className="flex justify-between items-center">
       <Title>Chương trình đào tạo</Title>
-      <Button onClick={() => setOpened(true)}>Tạo mới </Button>
+      {isAdmin ? (
+        <Button onClick={() => setOpened(true)}>Tạo mới </Button>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }

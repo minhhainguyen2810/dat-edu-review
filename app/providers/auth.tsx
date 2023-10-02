@@ -5,7 +5,7 @@ import { createContext, PropsWithChildren } from 'react';
 
 export const AuthContext = createContext<Session | null>(null);
 
-export function Providers({
+export function AuthProvider({
   children,
   session
 }: PropsWithChildren<{ session: Session | null }>) {

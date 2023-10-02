@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, Card, Title } from '@tremor/react';
-import { Rate } from 'antd';
+import { Card, Title } from '@tremor/react';
+import { Rate, message, Button } from 'antd';
 import { useParams } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
@@ -12,6 +12,8 @@ import { useContext } from 'react';
 import { AuthContext } from 'app/providers/auth';
 import dayjs from 'dayjs';
 import { RATE_RANKS } from 'app/const';
+import { useUserInfo } from 'app/hooks/useUserInfo';
+import { signIn } from 'next-auth/react';
 
 type Inputs = {
   pros: string;
@@ -47,21 +49,26 @@ export default function CreateComment({
 }: {
   programDetail: ProgramDetailProps;
 }) {
-  const session = useContext(AuthContext);
+  const { session } = useUserInfo();
   const { register, handleSubmit, control } = useForm<Inputs>();
   const searchParams = useParams<{ schoolId: string; programId: string }>();
   const { schoolId = '', programId = '' } = searchParams || {};
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await sendComment(
-      {
-        ...data,
-        user: session?.user?.name || '',
-        date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
-      },
-      schoolId,
-      programId
-    );
+    try {
+      await sendComment(
+        {
+          ...data,
+          user: session?.user?.name || '',
+          date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
+        },
+        schoolId,
+        programId
+      );
+      message.success('Gửi đánh giá thành công');
+    } catch {
+      message.success('Gửi đánh giá thất bại');
+    }
   };
 
   const customRequest: UploadProps['customRequest'] = async ({
@@ -88,6 +95,17 @@ export default function CreateComment({
     }
   };
 
+  if (!session?.user)
+    return (
+      <Card>
+        <div className="flex justify-center md:justify-start">
+          <Button type="primary" onClick={() => signIn()}>
+            Đăng nhập để gửi đánh giá
+          </Button>
+        </div>
+      </Card>
+    );
+
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,7 +128,7 @@ export default function CreateComment({
                     name="rate_overall"
                     control={control}
                     render={({ field }) => (
-                      <Rate {...field} tooltips={RATE_RANKS} />
+                      <Rate {...field} tooltips={RATE_RANKS} allowHalf />
                     )}
                   />
                 </div>
@@ -184,7 +202,7 @@ export default function CreateComment({
                   htmlFor="image_url"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  Cần cải thiện
+                  Thêm hình ảnh
                 </label>
                 <Controller
                   name="image_url"
@@ -197,7 +215,9 @@ export default function CreateComment({
             </div>
           </div>
           <div className="flex justify-center md:justify-start">
-            <Button type="submit">Gửi đánh giá</Button>
+            <Button type="primary" htmlType="submit">
+              Gửi đánh giá
+            </Button>
           </div>
         </div>
       </form>
