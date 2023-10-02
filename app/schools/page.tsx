@@ -1,7 +1,7 @@
 import Search from 'app/search';
 import SchoolList from './SchoolList';
 import Header from './Header';
-import CreateModal from './CreateModal';
+import CreateSchool from './CreateSchool';
 
 export default function Page({
   searchParams
@@ -14,7 +14,7 @@ export default function Page({
       <Search />
 
       <SchoolList searchParams={searchParams} />
-      <CreateModal />
+      <CreateSchool />
     </main>
   );
 }

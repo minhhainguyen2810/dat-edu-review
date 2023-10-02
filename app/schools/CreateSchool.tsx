@@ -1,8 +1,8 @@
 'use client';
 
-import { useParams } from 'next/navigation';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import Modal from 'app/components/Modal';
 
 type Inputs = {
   name: string;
@@ -10,12 +10,10 @@ type Inputs = {
   description: string;
 };
 
-import Modal from 'app/components/Modal';
-
-async function getData(body: Inputs) {
-  const res = await fetch(`/schools/api`, {
+async function createSchool(body: Inputs) {
+  const res = await fetch(`/api/school`, {
     method: 'POST',
-    body: JSON.stringify(body as any)
+    body: JSON.stringify(body)
   });
 
   if (!res.ok) {
@@ -26,16 +24,9 @@ async function getData(body: Inputs) {
 }
 
 export default function CreateModal({}) {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors }
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await getData({
-      ...data
-    });
+    await createSchool(data);
   };
 
   return (

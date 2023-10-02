@@ -25,10 +25,8 @@ type Inputs = {
   date: string;
 };
 
-
-
 async function sendComment(body: Inputs, schoolId: string, programId: string) {
-  const res = await fetch(`/schools/${schoolId}/programs/${programId}/api`, {
+  const res = await fetch(`/api/program/comment`, {
     method: 'POST',
     body: JSON.stringify({ ...body, program_id: programId })
   });
@@ -50,13 +48,7 @@ export default function CreateComment({
   programDetail: ProgramDetailProps;
 }) {
   const session = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    control,
-    formState: { errors }
-  } = useForm<Inputs>();
+  const { register, handleSubmit, control } = useForm<Inputs>();
   const searchParams = useParams<{ schoolId: string; programId: string }>();
   const { schoolId = '', programId = '' } = searchParams || {};
 
@@ -83,7 +75,7 @@ export default function CreateComment({
   }) => {
     try {
       const response = await fetch(
-        `/schools/${schoolId}/programs/${programId}/api/uploadCommentImage?filename=${fileName}`,
+        `api/uploadCommentImage?filename=${fileName}`,
         {
           method: 'POST',
           body: file
@@ -117,7 +109,9 @@ export default function CreateComment({
                   <Controller
                     name="rate_overall"
                     control={control}
-                    render={({ field }) => <Rate {...field} tooltips={RATE_RANKS} />}
+                    render={({ field }) => (
+                      <Rate {...field} tooltips={RATE_RANKS} />
+                    )}
                   />
                 </div>
               </div>

@@ -2,7 +2,7 @@ import { Card, Title, Button } from '@tremor/react';
 import Search from '../../../search';
 import ProgramList from './ProgramList';
 import Header from './Header';
-import CreateModal from './CreateModal';
+import CreateProgram from './CreateProgram';
 
 export default function Page({
   params,
@@ -17,7 +17,7 @@ export default function Page({
       <Search />
 
       <ProgramList params={params} searchParams={searchParams} />
-      <CreateModal />
+      <CreateProgram />
     </main>
   );
 }

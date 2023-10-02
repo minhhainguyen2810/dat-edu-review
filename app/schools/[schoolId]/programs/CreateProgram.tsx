@@ -14,8 +14,8 @@ type Inputs = {
 
 import Modal from 'app/components/Modal';
 
-async function getData(body: Inputs) {
-  const res = await fetch(`/schools/api`, {
+async function createProgram(body: Inputs) {
+  const res = await fetch(`/api/program`, {
     method: 'POST',
     body: JSON.stringify(body as any)
   });
@@ -36,7 +36,7 @@ export default function CreateModal({}) {
   } = useForm<Inputs>();
   const searchParams = useParams();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    await getData({
+    await createProgram({
       ...data,
       school_id: searchParams?.schoolId as string
     });
@@ -49,7 +49,8 @@ export default function CreateModal({}) {
         okText="Thêm"
         icon={
           <AcademicCapIcon
-            className="h-6 w-6 text-blue-600"
+            className="h-6 
+            w-6 text-blue-600"
             aria-hidden="true"
           />
         }
