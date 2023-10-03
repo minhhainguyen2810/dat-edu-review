@@ -1,7 +1,7 @@
 'use client';
 
-import { Title, Button } from '@tremor/react';
-
+import { Title } from '@tremor/react';
+import { Button } from 'antd';
 import { useModalStore } from 'app/hooks';
 import { useUserInfo } from 'app/hooks/useUserInfo';
 
@@ -14,7 +14,9 @@ export default function Page() {
     <div className="flex justify-between items-center">
       <Title>Chương trình đào tạo</Title>
       {isAdmin ? (
-        <Button onClick={() => setOpened(true)}>Tạo mới </Button>
+        <Button type="primary" onClick={() => setOpened(true)}>
+          Tạo mới{' '}
+        </Button>
       ) : (
         <div></div>
       )}

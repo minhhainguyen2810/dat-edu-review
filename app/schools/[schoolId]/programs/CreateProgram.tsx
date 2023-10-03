@@ -3,6 +3,9 @@
 import { useParams } from 'next/navigation';
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { useModalStore } from 'app/hooks';
 
 type Inputs = {
   name: string;
@@ -31,13 +34,23 @@ export default function CreateModal({}) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { isSubmitting }
   } = useForm<Inputs>();
   const searchParams = useParams();
+  const { setOpened } = useModalStore((state) => state);
+
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await createProgram({
       ...data,
       school_id: searchParams?.schoolId as string
+    });
+
+    startTransition(() => {
+      router.refresh();
+      setOpened(false);
     });
   };
 
@@ -46,6 +59,7 @@ export default function CreateModal({}) {
       <Modal
         title="Thêm mới chương trình học"
         okText="Thêm"
+        loading={isPending || isSubmitting}
         icon={
           <AcademicCapIcon
             className="h-6 

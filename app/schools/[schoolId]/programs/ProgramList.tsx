@@ -1,5 +1,5 @@
-import { Card, Title, Button } from '@tremor/react';
-import { queryBuilder } from '../../../../lib/planetscale';
+import { Card } from '@tremor/react';
+import { queryBuilder } from 'lib/planetscale';
 
 export default async function ProgramList({
   params,

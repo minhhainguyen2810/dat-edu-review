@@ -1,8 +1,9 @@
 'use client';
 
-import { Title, Button } from '@tremor/react';
+import { Title } from '@tremor/react';
 import { useModalStore } from 'app/hooks';
 import { useUserInfo } from 'app/hooks/useUserInfo';
+import { Button } from 'antd';
 
 export default function Header() {
   const { setOpened } = useModalStore((state) => state);
@@ -13,7 +14,9 @@ export default function Header() {
     <div className="flex justify-between items-center">
       <Title>Đánh giá & thông tin chi tiết các trường học</Title>
       {isAdmin ? (
-        <Button onClick={() => setOpened(true)}>Tạo mới </Button>
+        <Button type="primary" onClick={() => setOpened(true)}>
+          Tạo mới
+        </Button>
       ) : (
         <div></div>
       )}

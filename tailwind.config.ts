@@ -11,6 +11,7 @@ export default {
     current: 'currentColor',
     extend: {
       colors: {
+        primary: '#16a34a',
         // light mode
         tremor: {
           brand: {

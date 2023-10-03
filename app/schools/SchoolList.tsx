@@ -1,5 +1,4 @@
-import { Card, Title, Button } from '@tremor/react';
-import { ISchool } from 'app/types';
+import { Card, Title } from '@tremor/react';
 import { queryBuilder } from 'lib/planetscale';
 
 export default async function SchoolList({

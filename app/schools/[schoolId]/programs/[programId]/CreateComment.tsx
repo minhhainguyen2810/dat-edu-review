@@ -8,8 +8,6 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import type { RcFile, UploadProps } from 'antd/es/upload/interface';
 import Upload from 'app/components/Upload';
 import { IProgramDetail } from 'app/types';
-import { useContext } from 'react';
-import { AuthContext } from 'app/providers/auth';
 import dayjs from 'dayjs';
 import { RATE_RANKS } from 'app/const';
 import { useUserInfo } from 'app/hooks/useUserInfo';
