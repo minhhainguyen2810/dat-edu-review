@@ -3,6 +3,9 @@
 import { AcademicCapIcon } from '@heroicons/react/24/outline';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Modal from 'app/components/Modal';
+import { useRouter } from 'next/navigation';
+import { useModalStore } from 'app/hooks';
+import { useTransition } from 'react';
 
 type Inputs = {
   name: string;
@@ -24,9 +27,22 @@ async function createSchool(body: Inputs) {
 }
 
 export default function CreateModal({}) {
-  const { register, handleSubmit } = useForm<Inputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting }
+  } = useForm<Inputs>();
+  const { setOpened } = useModalStore((state) => state);
+  const [isPending, startTransition] = useTransition();
+
+  const router = useRouter();
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     await createSchool(data);
+
+    startTransition(() => {
+      router.refresh();
+      setOpened(false);
+    });
   };
 
   return (
@@ -41,6 +57,7 @@ export default function CreateModal({}) {
           />
         }
         onOk={handleSubmit(onSubmit)}
+        loading={isPending || isSubmitting}
       >
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">

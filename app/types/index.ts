@@ -18,3 +18,9 @@ export interface IProgramDetail {
   description: string;
   school_id: number;
 }
+
+export interface ISchool {
+  id: number;
+  name: string;
+  description: string;
+}

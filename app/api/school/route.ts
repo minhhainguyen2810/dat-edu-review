@@ -1,5 +1,5 @@
 import { queryBuilder } from 'lib/planetscale';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { revalidateTag } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
@@ -10,7 +10,28 @@ export async function POST(request: Request) {
       .insertInto('school')
       .values({ ...body })
       .executeTakeFirst();
+
+    revalidateTag('schools');
+
     return NextResponse.json({ result: 'Oke' });
+  } catch (err) {
+    console.log(err);
+
+    return NextResponse.error();
+  }
+}
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+
+    const schools = await queryBuilder
+      .selectFrom('school')
+      .select(['id', 'name', 'description'])
+      .where('name', 'like', `%${searchParams.get('q') || ''}%`)
+      .execute();
+
+    return NextResponse.json({ data: schools });
   } catch (err) {
     console.log(err);
 

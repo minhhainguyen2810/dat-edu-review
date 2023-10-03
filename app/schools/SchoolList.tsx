@@ -1,6 +1,6 @@
 import { Card, Title, Button } from '@tremor/react';
+import { ISchool } from 'app/types';
 import { queryBuilder } from 'lib/planetscale';
-import { useSearchParams } from 'next/navigation';
 
 export default async function SchoolList({
   searchParams
@@ -10,12 +10,12 @@ export default async function SchoolList({
   const schools = await queryBuilder
     .selectFrom('school')
     .select(['id', 'name', 'description'])
-    .where('name', 'like', `%${searchParams.q || ''}%`)
+    .where('name', 'like', `%${searchParams?.q || ''}%`)
     .execute();
 
   return (
     <>
-      {schools.map(({ id, name, description }) => (
+      {schools?.map(({ id, name, description }) => (
         <a key={id} href={`/schools/${id}/programs/`}>
           <Card className="mt-6">
             <Title>{name}</Title>

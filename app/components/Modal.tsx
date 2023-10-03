@@ -6,6 +6,7 @@ import { TextInput } from '@tremor/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useModalStore } from '../hooks';
+import { Spin } from 'antd';
 
 export interface IModal {
   title: string;
@@ -13,9 +14,17 @@ export interface IModal {
   children: React.ReactElement;
   okText: string;
   onOk: (data: any) => void;
+  loading?: boolean;
 }
 
-const Modal: React.FC<IModal> = ({ title, icon, children, okText, onOk }) => {
+const Modal: React.FC<IModal> = ({
+  title,
+  icon,
+  children,
+  okText,
+  onOk,
+  loading
+}) => {
   const { setOpened, opened } = useModalStore((state) => state);
 
   const cancelButtonRef = useRef(null);
@@ -73,8 +82,9 @@ const Modal: React.FC<IModal> = ({ title, icon, children, okText, onOk }) => {
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
                     onClick={onOk}
+                    disabled={loading}
                   >
-                    {okText}
+                    {loading ? <Spin /> : okText}
                   </button>
                   <button
                     type="button"
