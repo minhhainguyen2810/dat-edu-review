@@ -1,3 +1,5 @@
+import { Session } from 'next-auth';
+
 export interface IProgramComment {
   pros?: string;
   cons?: string;
