@@ -27,6 +27,8 @@ export interface ISchool {
   description: string;
 }
 
-export type TSession = Session & {
-  role: string;
+export type TSession = Omit<Session, 'user'> & {
+  user: Session['user'] & {
+    role: string;
+  };
 };
