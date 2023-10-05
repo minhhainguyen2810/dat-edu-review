@@ -7,13 +7,11 @@ import {
   TableCell,
   Text
 } from '@tremor/react';
+import { Database } from 'lib/planetscale';
 
-interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-}
+type User = Partial<Omit<Database['User'], 'id'>> & {
+  id: string;
+};
 
 export default function UsersTable({ users }: { users: User[] }) {
   return (
@@ -30,7 +28,7 @@ export default function UsersTable({ users }: { users: User[] }) {
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
             <TableCell>
-              <Text>{user.username}</Text>
+              <Text>{user.role}</Text>
             </TableCell>
             <TableCell>
               <Text>{user.email}</Text>

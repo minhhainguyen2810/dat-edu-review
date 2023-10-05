@@ -24,3 +24,7 @@ export interface ISchool {
   name: string;
   description: string;
 }
+
+export type TSession = Session & {
+  role: string;
+};

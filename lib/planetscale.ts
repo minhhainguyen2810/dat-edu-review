@@ -9,7 +9,8 @@ interface User {
   email: string;
   emailVerified: Date | null;
   image: string | null;
-};
+  role: string;
+}
 
 interface Account {
   id: GeneratedAlways<string>;
@@ -24,20 +25,20 @@ interface Account {
   scope: string | null;
   id_token: string | null;
   session_state: string | null;
-};
+}
 
 interface Session {
   id: GeneratedAlways<string>;
   userId: string;
   sessionToken: string;
   expires: Date;
-};
+}
 
 interface VerificationToken {
   identifier: string;
   token: string;
   expires: Date;
-};
+}
 
 interface School {
   id: Generated<number>;
@@ -82,6 +83,5 @@ export interface Database {
 export const queryBuilder = new KyselyAuth<Database>({
   dialect: new PlanetScaleDialect({
     url: process.env.DATABASE_URL
-  
   })
 });

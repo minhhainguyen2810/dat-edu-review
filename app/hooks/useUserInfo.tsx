@@ -6,6 +6,6 @@ export const useUserInfo = () => {
 
   return {
     session,
-    isAdmin: session?.user?.email === 'champion.minh@gmail.com'
+    isAdmin: session?.user?.role === 'admin'
   };
 };

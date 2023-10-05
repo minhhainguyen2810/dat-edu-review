@@ -4,8 +4,7 @@ import { Card, Title } from '@tremor/react';
 import { Rate, message, Button } from 'antd';
 import { useParams } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-
-import type { RcFile, UploadProps } from 'antd/es/upload/interface';
+import uploadCustomRequest from 'app/helpers/uploadCustomRequest';
 import Upload from 'app/components/Upload';
 import { IProgramDetail } from 'app/types';
 import dayjs from 'dayjs';
@@ -66,30 +65,6 @@ export default function CreateComment({
       message.success('Gửi đánh giá thành công');
     } catch {
       message.success('Gửi đánh giá thất bại');
-    }
-  };
-
-  const customRequest: UploadProps['customRequest'] = async ({
-    file,
-    fileName,
-    onSuccess
-  }: {
-    file: RcFile | string | Blob;
-    fileName?: string;
-    onSuccess?: any;
-  }) => {
-    try {
-      const response = await fetch(
-        `api/uploadCommentImage?filename=${fileName}`,
-        {
-          method: 'POST',
-          body: file
-        }
-      );
-
-      onSuccess?.(await response.json(), file as any);
-    } catch (e) {
-      console.log(e);
     }
   };
 
@@ -206,7 +181,7 @@ export default function CreateComment({
                   name="image_url"
                   control={control}
                   render={({ field }) => (
-                    <Upload {...field} customRequest={customRequest} />
+                    <Upload {...field} customRequest={uploadCustomRequest} />
                   )}
                 />
               </div>

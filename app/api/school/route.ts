@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
   try {
+    console.log(request.url);
+
     const body = await request.json();
 
     await queryBuilder
