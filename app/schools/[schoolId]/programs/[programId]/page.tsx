@@ -50,6 +50,7 @@ export default async function Page({
       <Title className="font-medium mt-6">
         Đánh giá từ học viên ({program_comments.length})
       </Title>
+      
       <ProgramComment programComment={program_comments} />
     </main>
   );

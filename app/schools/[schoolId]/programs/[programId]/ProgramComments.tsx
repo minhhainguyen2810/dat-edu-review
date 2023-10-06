@@ -9,8 +9,34 @@ import dayjs from 'dayjs';
 import { Avatar, Rate } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import RateInfo from 'app/components/Rate';
+import ImageGallery from 'app/components/ImageGallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
+import ReactImageGallery from 'react-image-gallery';
 
 dayjs.extend(relativeTime);
+
+const images = [
+  {
+    original: 'https://picsum.photos/id/1018/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1018/250/150/'
+  },
+  {
+    original: 'https://picsum.photos/id/1015/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1015/250/150/'
+  },
+  {
+    original: 'https://picsum.photos/id/1020/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1020/250/150/'
+  },
+  {
+    original: 'https://picsum.photos/id/1021/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1021/250/150/'
+  },
+  {
+    original: 'https://picsum.photos/id/1019/1000/600/',
+    thumbnail: 'https://picsum.photos/id/1019/250/150/'
+  }
+];
 
 interface ProgramCommentProps {
   programComment: IProgramComment[];
@@ -21,6 +47,13 @@ export default function ProgramComment({
 }: ProgramCommentProps) {
   return (
     <Card className="my-6 space-y-4">
+      <ReactImageGallery
+        items={images}
+        slideInterval={10000}
+        showPlayButton={false}
+        lazyLoad
+        // renderItem={() => null}
+      />
       {programComment.map((comment, index) => (
         <div className="" key={comment.id}>
           <div className="flex">
@@ -54,6 +87,7 @@ export default function ProgramComment({
                 <span>Cần cải thiện: </span>
                 <span>{comment.need_to_improved || '-'}</span>
               </Text>
+              <ImageGallery />
             </div>
           </div>
         </div>

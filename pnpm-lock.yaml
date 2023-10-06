@@ -14,6 +14,7 @@ specifiers:
   '@types/node': 20.5.6
   '@types/react': 18.2.21
   '@types/react-dom': 18.2.7
+  '@types/react-image-gallery': ^1.2.1
   '@vercel/analytics': ^1.0.2
   '@vercel/blob': ^0.12.5
   antd: ^5.9.3
@@ -32,6 +33,7 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-hook-form: ^7.46.2
+  react-image-gallery: ^1.3.0
   react-query: ^3.39.3
   server-only: ^0.0.1
   tailwindcss: ^3.3.3
@@ -69,6 +71,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.46.2_react@18.2.0
+  react-image-gallery: 1.3.0_react@18.2.0
   react-query: 3.39.3_biqbaboplfbrettd7655fr4n2y
   server-only: 0.0.1
   tailwindcss: 3.3.3
@@ -77,6 +80,7 @@ dependencies:
 
 devDependencies:
   '@tailwindcss/forms': 0.5.6_tailwindcss@3.3.3
+  '@types/react-image-gallery': 1.2.1
 
 packages:
 
@@ -799,7 +803,6 @@ packages:
 
   /@types/prop-types/15.7.6:
     resolution: {integrity: sha512-RK/kBbYOQQHLYj9Z95eh7S6t7gq4Ojt/NT8HTk8bWVhA5DaF+5SMnxHKkP4gPNN3wAZkKP+VjAf0ebtYzf+fxg==}
-    dev: false
 
   /@types/react-dom/18.2.7:
     resolution: {integrity: sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==}
@@ -807,17 +810,21 @@ packages:
       '@types/react': 18.2.21
     dev: false
 
+  /@types/react-image-gallery/1.2.1:
+    resolution: {integrity: sha512-VWJef2WQOR1TqXvuJifNqrBdqrGQVImwz9Zdf1qjSEnBCqkk6LgAAeiQwd9nQ4sq1jmCWkK9lZ3+fqvt5vy1Ow==}
+    dependencies:
+      '@types/react': 18.2.21
+    dev: true
+
   /@types/react/18.2.21:
     resolution: {integrity: sha512-neFKG/sBAwGxHgXiIxnbm3/AAVQ/cMRS93hvBpg8xYRbeQSPVABp9U2bRnPf0iI4+Ucdv3plSxKK+3CW2ENJxA==}
     dependencies:
       '@types/prop-types': 15.7.6
       '@types/scheduler': 0.16.3
       csstype: 3.1.2
-    dev: false
 
   /@types/scheduler/0.16.3:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
-    dev: false
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
@@ -1434,7 +1441,6 @@ packages:
 
   /csstype/3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
-    dev: false
 
   /d3-array/3.2.4:
     resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
@@ -3941,6 +3947,14 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /react-image-gallery/1.3.0_react@18.2.0:
+    resolution: {integrity: sha512-lKnPaOzxqSdujPFyl+CkVw0j1aYoNCHk61cvr1h7aahf5aWqmPcR9YhUB4cYrt5Tn5KHDaPUzYm5/+cX9WxzaA==}
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
     dev: false

@@ -4,13 +4,7 @@ import CreateComment from './CreateComment';
 
 export const dynamic = 'force-dynamic';
 
-export default async function IndexPage({
-  searchParams
-}: {
-  searchParams: { q: string };
-}) {
-  const search = searchParams.q ?? '';
-
+export default async function IndexPage() {
   return (
     <main className="md:p-4 mx-auto max-w-7xl">
       <div className="flex justify-center">
