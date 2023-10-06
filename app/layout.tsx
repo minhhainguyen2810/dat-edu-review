@@ -25,10 +25,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="h-full bg-gray-50">
-      <body className={inter.className}>
+      <body className={`${inter.className} `}>
         <Suspense>
           <Nav />
         </Suspense>
+        
         <AuthProvider session={sessionWithRole}>
           <ConfigProvider theme={theme}>
             <StyledComponentsRegistry>{children}</StyledComponentsRegistry>

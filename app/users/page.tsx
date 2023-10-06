@@ -22,7 +22,7 @@ export default async function IndexPage(page: { searchParams: { q: string } }) {
     redirect('/');
   }
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+    <main className="p-4 md:p-10 mx-auto max-w-7xl min-h-[calc(100vh-64px-48px)]">
       <Title>Users</Title>
       <Text>
         A list of users retrieved from a MySQL database (PlanetScale).

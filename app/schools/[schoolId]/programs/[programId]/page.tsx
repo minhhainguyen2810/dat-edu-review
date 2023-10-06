@@ -43,7 +43,7 @@ export default async function Page({
   const { school_name } = programDetail[0];
 
   return (
-    <main className="p-4 md:p-10 mx-auto max-w-7xl">
+    <main className="p-4 md:p-10 mx-auto max-w-7xl min-h-[calc(100vh-64px-48px)]">
       <Title>Trường: {school_name}</Title>
       <ProgramDetail programDetail={programDetail[0]} />
       <CreateComment programDetail={programDetail[0]} />

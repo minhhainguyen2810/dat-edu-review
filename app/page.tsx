@@ -6,7 +6,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function IndexPage() {
   return (
-    <main className="md:p-4 mx-auto max-w-7xl">
+    <main className="md:p-4 mx-auto max-w-7xl min-h-[calc(100vh-64px-48px)]">
       <div className="flex justify-center">
         <Image src={homepage} alt="Picture of the author" />
       </div>
