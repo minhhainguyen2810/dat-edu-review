@@ -1,8 +1,6 @@
 'use client';
 
 import { useRef, ReactElement, useState } from 'react';
-
-import { Button } from 'antd';
 import ReactImageGallery, { ReactImageGalleryProps } from 'react-image-gallery';
 
 export interface IModal {
@@ -47,16 +45,9 @@ const ImageGallery = () => {
         slideInterval={10000}
         showPlayButton={false}
         lazyLoad
-        showFullscreenButton={true}
+        showFullscreenButton={isFullscreen}
         showNav={isFullscreen}
       />
-      {/* <Button
-        type="dashed"
-        className="top-[-61px] w-[30px] left-[60px]"
-        onClick={handleClick}
-      >
-        +1
-      </Button> */}
       <span className="relative text-white top-[-55px] left-[70px]">+3</span>
     </div>
   );
