@@ -6,7 +6,7 @@ import { Fragment } from 'react';
 
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
-import { Avatar, Rate } from 'antd';
+import { Avatar, Empty, Rate } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import RateInfo from 'app/components/Rate';
 import ImageGallery from 'app/components/ImageGallery';
@@ -45,6 +45,10 @@ interface ProgramCommentProps {
 export default function ProgramComment({
   programComment
 }: ProgramCommentProps) {
+  if (!programComment.length) {
+    return <Empty description="Chưa có đánh giá nào" />;
+  }
+
   return (
     <Card className="my-6 space-y-4">
       <ReactImageGallery

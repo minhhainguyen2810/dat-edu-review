@@ -68,6 +68,7 @@ interface ProgramComment {
   rate_facilities: number;
   rate_overall: number;
   user: string;
+  is_approved: boolean;
 }
 
 export interface Database {

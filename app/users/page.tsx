@@ -1,7 +1,7 @@
 import { Card, Title, Text } from '@tremor/react';
 import { queryBuilder } from 'lib/planetscale';
 import Search from '../search';
-import UsersTable from './table';
+import CommentsTable from './table';
 import { NextRequest, NextResponse } from 'next/server';
 import getUserInfo from 'app/helpers/getUserInfo';
 import { redirect } from 'next/navigation';
@@ -29,7 +29,7 @@ export default async function IndexPage(page: { searchParams: { q: string } }) {
       </Text>
       <Search />
       <Card className="mt-6">
-        <UsersTable users={users} />
+        <CommentsTable users={users} />
       </Card>
     </main>
   );

@@ -1,4 +1,5 @@
 import { Card } from '@tremor/react';
+import { Empty } from 'antd';
 import { queryBuilder } from 'lib/planetscale';
 
 export default async function ProgramList({
@@ -17,6 +18,9 @@ export default async function ProgramList({
     .where('school_id', '=', schoolId)
     .where('name', 'like', `%${search}%`)
     .execute();
+
+  if (!programs.length)
+    return <Empty className="mt-6" description="Không có kết quả tìm kiếm" />;
 
   return (
     <>

@@ -22,6 +22,8 @@ type Inputs = {
   image_url: string;
   user: string;
   date: string;
+  user_email: string;
+  is_approved: boolean;
 };
 
 async function sendComment(body: Inputs, schoolId: string, programId: string) {
@@ -49,12 +51,15 @@ export default function CreateComment() {
         {
           ...data,
           user: session?.user?.name || '',
+          user_email: session?.user?.email || '',
           date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
         },
         schoolId,
         programId
       );
-      message.success('Gửi đánh giá thành công');
+      message.success(
+        'Gửi đánh giá thành công, đánh giá của bạn đang chờ được duyệt bởi quản trị viên'
+      );
     } catch {
       message.success('Gửi đánh giá thất bại');
     }

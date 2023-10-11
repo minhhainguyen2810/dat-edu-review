@@ -6,8 +6,9 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     await queryBuilder
-      .insertInto('program_comment')
-      .values({ ...body, is_approved: false })
+      .updateTable('program_comment')
+      .set({ is_approved: true })
+      .where('id', '=', body.id)
       .executeTakeFirst();
     return NextResponse.json({ result: 'Oke' });
   } catch (err) {
