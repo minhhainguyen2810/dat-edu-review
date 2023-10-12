@@ -25,7 +25,6 @@ async function sendComment(body: Inputs) {
 
 interface DataType {
   //   key: string;
-  id: string;
   pros: string;
   cons: string;
   need_to_improved?: string;
@@ -35,8 +34,8 @@ interface DataType {
   //   rate_facilities: number;
   rate_overall: number;
   user: string;
-  program_id: string;
-  school_id: string;
+  program_id: number;
+  school_id: number;
   is_approved: boolean;
 }
 

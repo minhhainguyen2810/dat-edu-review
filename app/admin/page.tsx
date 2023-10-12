@@ -12,7 +12,6 @@ export default async function IndexPage() {
     .selectFrom('program_comment')
     .innerJoin('program', 'program.id', 'program_comment.program_id')
     .select([
-      'id',
       'cons',
       'pros',
       'rate_overall',
