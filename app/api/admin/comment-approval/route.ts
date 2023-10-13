@@ -7,7 +7,7 @@ export async function POST(request: Request) {
 
     await queryBuilder
       .updateTable('program_comment')
-      .set({ is_approved: 1 })
+      .set({ is_approved: true })
       .where('id', '=', body.id)
       .executeTakeFirst();
     return NextResponse.json({ result: 'Oke' });
