@@ -27,7 +27,7 @@ type Inputs = {
 async function sendComment(body: Inputs, schoolId: string, programId: string) {
   const res = await fetch(`/api/program/comment`, {
     method: 'POST',
-    body: JSON.stringify({ ...body, program_id: programId })
+    body: JSON.stringify({ ...body, program_id: programId, school_id: schoolId })
   });
 
   if (!res.ok) {

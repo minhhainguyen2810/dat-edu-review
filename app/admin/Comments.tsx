@@ -7,7 +7,7 @@ import type { ColumnsType } from 'antd/es/table';
 
 interface Inputs {
   id: string;
-  program_id: string;
+  program_id: number;
 }
 
 async function sendComment(body: Inputs) {
@@ -25,6 +25,7 @@ async function sendComment(body: Inputs) {
 
 interface DataType {
   //   key: string;
+  id: number;
   pros: string;
   cons: string;
   need_to_improved?: string;
@@ -82,7 +83,10 @@ const columns: ColumnsType<DataType> = [
     render: (_, record) => (
       <Button
         type="link"
-        onClick={handleClick({ id: record.id, program_id: record.program_id })}
+        onClick={handleClick({
+          id: `${record.id}`,
+          program_id: record.program_id
+        })}
       >
         Approve
       </Button>
@@ -91,5 +95,5 @@ const columns: ColumnsType<DataType> = [
 ];
 
 export default function CommentsTable({ comments }: { comments: DataType[] }) {
-  return <Table columns={columns} dataSource={comments} />;
+  return <Table columns={columns} dataSource={comments} rowKey={"id"}/>;
 }

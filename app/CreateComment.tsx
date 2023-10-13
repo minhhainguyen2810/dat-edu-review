@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, Title } from '@tremor/react';
-import { Rate, message, Button } from 'antd';
+import { Rate, message, Button, Select } from 'antd';
 import { useParams } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import uploadCustomRequest from 'app/helpers/uploadCustomRequest';
@@ -11,6 +11,8 @@ import dayjs from 'dayjs';
 import { RATE_RANKS } from 'app/const';
 import { useUserInfo } from 'app/hooks/useUserInfo';
 import { signIn } from 'next-auth/react';
+import { AutoComplete } from 'antd';
+import { useState } from 'react';
 
 type Inputs = {
   pros: string;
@@ -24,6 +26,8 @@ type Inputs = {
   date: string;
   user_email: string;
   is_approved: boolean;
+  school_id: string;
+  program_id: string;
 };
 
 async function sendComment(body: Inputs, schoolId: string, programId: string) {
@@ -39,11 +43,24 @@ async function sendComment(body: Inputs, schoolId: string, programId: string) {
   return res.json();
 }
 
-export default function CreateComment() {
+export type School = {
+  id: number;
+  name: string;
+};
+
+export default function CreateComment({ schools }: { schools: School[] }) {
   const { session } = useUserInfo();
-  const { register, handleSubmit, control } = useForm<Inputs>();
+  const { register, handleSubmit, control, setValue } = useForm<Inputs>();
   const searchParams = useParams<{ schoolId: string; programId: string }>();
-  const { schoolId = '', programId = '' } = searchParams || {};
+
+  const [programId, setProgramId] = useState('');
+  const [schoolId, setSchoolId] = useState('');
+  const [options, setOptions] = useState<{ value: string; label: string }[]>(
+    []
+  );
+  const [programOptions, setProgramOptions] = useState<
+    { value: string; label: string }[]
+  >([]);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
@@ -52,6 +69,8 @@ export default function CreateComment() {
           ...data,
           user: session?.user?.name || '',
           user_email: session?.user?.email || '',
+          school_id: schoolId,
+          program_id: programId,
           date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss')
         },
         schoolId,
@@ -61,8 +80,77 @@ export default function CreateComment() {
         'Gửi đánh giá thành công, đánh giá của bạn đang chờ được duyệt bởi quản trị viên'
       );
     } catch {
-      message.success('Gửi đánh giá thất bại');
+      message.error('Gửi đánh giá thất bại');
     }
+  };
+
+  const handleSearch = async (text: string) => {
+    console.log(text);
+    try {
+      const res = await fetch(`/api/school?q=${text}`, {
+        method: 'GET'
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const result = await res.json();
+      console.log(result);
+
+      setOptions(
+        result.data.map((item: School) => ({
+          label: item.name,
+          value: item.id
+        }))
+      );
+    } catch {
+      console.log('failed to fetch');
+    }
+  };
+
+  const handleSelect = async (
+    value: string,
+    option: { value: string; label: string }
+  ) => {
+    setValue('school_id', option.label);
+    setSchoolId(value);
+
+    try {
+      const res = await fetch(`/api/program?schoolId=${value}`, {
+        method: 'GET'
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const result = await res.json();
+      console.log(result);
+
+      setProgramOptions(
+        result.data.map((item: School) => ({
+          label: item.name,
+          value: item.id
+        }))
+      );
+    } catch {
+      console.log('failed to fetch');
+    }
+  };
+
+  const handleSelectProgram = async (
+    value: string,
+    option: { value: string; label: string }
+  ) => {
+    setValue('program_id', option.label);
+
+    setProgramId(value);
+  };
+
+  const handleSearchProgram = async (text: string) => {
+    console.log(text);
+    setProgramOptions(
+      programOptions.filter((program) => program.label === text)
+    );
   };
 
   if (!session?.user)
@@ -84,6 +172,58 @@ export default function CreateComment() {
           <div className="border-b border-gray-900/10 pb-12">
             <Title>Viết đánh giá cho khoa</Title>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="school_id"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Trường:
+                </label>
+                <div className="mt-2">
+                  <Controller
+                    name="school_id"
+                    control={control}
+                    render={({ field, formState: {} }) => (
+                      <AutoComplete
+                        {...field}
+                        className="focus:shadow-white"
+                        options={options}
+                        style={{ width: 200, boxShadow: 'none' }}
+                        onSearch={handleSearch}
+                        placeholder="control mode"
+                        onSelect={handleSelect}
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-4">
+                <label
+                  htmlFor="program_id"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Khoa:
+                </label>
+                <div className="mt-2">
+                  <Controller
+                    name="program_id"
+                    control={control}
+                    render={({ field }) => (
+                      <AutoComplete
+                        {...field}
+                        className="focus:shadow-white"
+                        options={programOptions}
+                        style={{ width: 200, boxShadow: 'none' }}
+                        onSearch={handleSearchProgram}
+                        placeholder="control mode"
+                        onSelect={handleSelectProgram}
+                      />
+                    )}
+                  />
+                </div>
+              </div>
+
               <div className="sm:col-span-4">
                 <label
                   htmlFor="pros"
