@@ -1,12 +1,10 @@
 'use client';
 
-import { Card, Title } from '@tremor/react';
+import { Title } from '@tremor/react';
 import { Rate, message, Button, Select } from 'antd';
-import { useParams } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import uploadCustomRequest from 'app/helpers/uploadCustomRequest';
 import Upload from 'app/components/Upload';
-import { IProgramDetail } from 'app/types';
 import dayjs from 'dayjs';
 import { RATE_RANKS } from 'app/const';
 import { useUserInfo } from 'app/hooks/useUserInfo';
@@ -51,7 +49,6 @@ export type School = {
 export default function CreateComment() {
   const { session } = useUserInfo();
   const { register, handleSubmit, control, setValue } = useForm<Inputs>();
-  const searchParams = useParams<{ schoolId: string; programId: string }>();
 
   const [programId, setProgramId] = useState('');
   const [schoolId, setSchoolId] = useState('');
@@ -124,7 +121,6 @@ export default function CreateComment() {
         throw new Error('Failed to fetch data');
       }
       const result = await res.json();
-      console.log(result);
 
       setProgramOptions(
         result.data.map((item: School) => ({
@@ -147,7 +143,6 @@ export default function CreateComment() {
   };
 
   const handleSearchProgram = async (text: string) => {
-    console.log(text);
     setProgramOptions(
       programOptions.filter((program) => program.label === text)
     );
@@ -170,7 +165,7 @@ export default function CreateComment() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <Title>Viết đánh giá cho khoa</Title>
+            <Title>Viết đánh giá cho trường của bạn</Title>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-4">
                 <label
@@ -190,7 +185,6 @@ export default function CreateComment() {
                         options={options}
                         style={{ width: 200, boxShadow: 'none' }}
                         onSearch={handleSearch}
-                        placeholder="control mode"
                         onSelect={handleSelect}
                       />
                     )}
@@ -216,7 +210,6 @@ export default function CreateComment() {
                         options={programOptions}
                         style={{ width: 200, boxShadow: 'none' }}
                         onSearch={handleSearchProgram}
-                        placeholder="control mode"
                         onSelect={handleSelectProgram}
                       />
                     )}
