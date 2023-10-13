@@ -48,7 +48,7 @@ export type School = {
   name: string;
 };
 
-export default function CreateComment({ schools }: { schools: School[] }) {
+export default function CreateComment() {
   const { session } = useUserInfo();
   const { register, handleSubmit, control, setValue } = useForm<Inputs>();
   const searchParams = useParams<{ schoolId: string; programId: string }>();
