@@ -26,7 +26,7 @@ export default async function ProgramList({
     <>
       {programs.map(({ id, name, goal }) => (
         <a key={id} href={`/schools/${schoolId}/programs/${id}`}>
-          <Card className="mt-6">
+          <Card className="mt-6 shadow-md">
             <h3>{name}</h3>
             <p>Muc tieu dao tao: {goal}</p>
           </Card>

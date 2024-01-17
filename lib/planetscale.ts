@@ -71,6 +71,28 @@ interface ProgramComment {
   is_approved: boolean;
 }
 
+interface Workplace {
+  id: Generated<number>;
+  name: string;
+  description: string;
+  location: string;
+}
+
+interface WorkplaceComment {
+  id: Generated<number>;
+  workplace_id: Generated<number>;
+  pros: string;
+  cons: string;
+  need_to_improved: string;
+  date: string;
+  rate_teachers: number;
+  rate_quality: number;
+  rate_facilities: number;
+  rate_overall: number;
+  user: string;
+  is_approved: boolean;
+}
+
 export interface Database {
   User: User;
   Account: Account;
@@ -79,6 +101,8 @@ export interface Database {
   school: School;
   program: Program;
   program_comment: ProgramComment;
+  workplace: Workplace;
+  workplace_comment: WorkplaceComment;
 }
 
 export const queryBuilder = new KyselyAuth<Database>({

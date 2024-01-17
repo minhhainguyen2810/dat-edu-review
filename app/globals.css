@@ -5,3 +5,6 @@
 input[type='search']:focus {
   box-shadow: none !important;
 }
+h3 {
+  font-weight: 500;
+}
